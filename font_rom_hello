@@ -1,0 +1,59 @@
+module font_rom_hello(
+
+// Font ROM for "hello"
+// Block font for "HELLO", 5x8 per letter
+    input [2:0] char_idx, // 0-4 for "H","E","L","L","O"
+    input [2:0] row,      // 0-7
+    output reg [4:0] bits // Each char is 5x8
+);
+    always @(*) begin
+        case (char_idx)
+            0: // H
+                case(row)
+                    0: bits = 5'b10001;
+                    1: bits = 5'b10001;
+                    2: bits = 5'b10001;
+                    3: bits = 5'b11111;
+                    4: bits = 5'b10001;
+                    5: bits = 5'b10001;
+                    6: bits = 5'b10001;
+                    7: bits = 5'b00000;
+                endcase
+            1: // E
+                case(row)
+                    0: bits = 5'b11111;
+                    1: bits = 5'b10000;
+                    2: bits = 5'b10000;
+                    3: bits = 5'b11110;
+                    4: bits = 5'b10000;
+                    5: bits = 5'b10000;
+                    6: bits = 5'b11111;
+                    7: bits = 5'b00000;
+                endcase
+            2, 3: // L
+                case(row)
+                    0: bits = 5'b10000;
+                    1: bits = 5'b10000;
+                    2: bits = 5'b10000;
+                    3: bits = 5'b10000;
+                    4: bits = 5'b10000;
+                    5: bits = 5'b10000;
+                    6: bits = 5'b11111;
+                    7: bits = 5'b00000;
+                endcase
+            4: // O
+                case(row)
+                    0: bits = 5'b01110;
+                    1: bits = 5'b10001;
+                    2: bits = 5'b10001;
+                    3: bits = 5'b10001;
+                    4: bits = 5'b10001;
+                    5: bits = 5'b10001;
+                    6: bits = 5'b01110;
+                    7: bits = 5'b00000;
+                endcase
+            default: bits = 5'b00000;
+        endcase
+    end
+endmodule
+
